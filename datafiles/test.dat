@@ -1,0 +1,41 @@
+\section{Two Examples}
+
+It's best to learn by example!
+
+Try running these programs!  You don't have to key in their source code;
+instead, you can get it from the raw file which produced this document,
+\url{http://heather.cs.ucdavis.edu/~matloff/UnixAndC/CLanguage/Curses.tex},
+and then editing out the non-code.
+
+If you are in a hurry, you may wish to go directly to the second
+example, which anyway is better commented and makes use of more {\tt
+curses} features.
+
+\subsection{Simple, Quick Introductory Example}
+
+Our first example does very little.  You can think of it as a very
+primitive, uninteresting game.  But it gives us a start.
+
+The comments at the top of the source file tell you what the ``game''
+does.  Compile and run the program, inputting various characters as you
+like.  Then read the code (start with {\bf main()}, as you should in
+general), with the comments doing the explaining.
+
+\begin{samepage}
+\begin{Verbatim}[fontsize=\relsize{-2},numbers=left]
+// simple curses example; keeps drawing the inputted characters, in columns
+// downward, shifting rightward when the last row is reached, and
+// wrapping around when the rightmost column is reached
+
+#include <curses.h>  // required
+
+int r,c,  // current row and column (upper-left is (0,0))
+    nrows,  // number of rows in window
+    ncols;  // number of columns in window
+
+void draw(char dc)
+
+{  move(r,c);  // curses call to move cursor to row r, column c
+   delch();  insch(dc);  // curses calls to replace character under cursor by
+dc
+   refresh();  // curses call to update screen
